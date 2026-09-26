@@ -29,28 +29,183 @@
   footer > div:last-child > div { justify-content: center; }
   footer > div:last-child > div { max-width: 80rem; margin-inline: auto; text-align: center; }
 
-  /* A continuous, sun-warmed safari canvas behind the site instead of flat white. */
+  /* A clean white-and-brown safari palette; all existing photography remains in use. */
   body {
     background:
-      linear-gradient(120deg, rgba(5, 37, 23, .86), rgba(31, 57, 35, .64) 46%, rgba(104, 68, 23, .52)),
+      linear-gradient(120deg, rgba(67, 43, 26, .72), rgba(111, 72, 35, .48) 46%, rgba(154, 105, 56, .35)),
       url('../pictures/IMG_5664%2013.59.49.JPG.jpeg') center / cover fixed !important;
   }
   main { background: transparent !important; }
   main > div { background: transparent; }
   main > div > section:not(:first-child):not(.bg-primary) {
-    background-color: rgba(236, 231, 213, .84) !important;
+    background-color: rgba(255, 253, 248, .96) !important;
     backdrop-filter: blur(7px);
-    border-top: 1px solid rgba(255, 255, 255, .20);
-    border-bottom: 1px solid rgba(5, 37, 23, .10);
+    border-top: 1px solid rgba(137, 91, 49, .16);
+    border-bottom: 1px solid rgba(79, 49, 28, .10);
   }
-  /* Keep cards crisp, but let the landscape and warm earth tones show around them. */
-  main .bg-surface { background-color: rgba(250, 247, 236, .88); }
-  main .bg-surface-container-low { background-color: rgba(241, 236, 219, .88); }
-  main .bg-surface-container { background-color: rgba(231, 226, 207, .88); }
-  main .bg-surface-container-high { background-color: rgba(220, 216, 197, .88); }
+  /* White reading surfaces with layered biscuit-brown cards. */
+  main .bg-surface { background-color: rgba(255, 253, 248, .96); }
+  main .bg-surface-container-low { background-color: rgba(250, 241, 229, .96); }
+  main .bg-surface-container { background-color: rgba(244, 228, 207, .96); }
+  main .bg-surface-container-high { background-color: rgba(234, 211, 184, .96); }
+
+  :root {
+    --run-brown: #3d2618;
+    --run-brown-soft: #64422b;
+    --run-caramel: #a76a32;
+    --run-caramel-light: #d89b59;
+    --run-cream: #fffdf8;
+    --run-ink: #2c2018;
+  }
+  .bg-primary { background-color: var(--run-brown) !important; }
+  .bg-primary-container { background-color: var(--run-brown-soft) !important; }
+  .text-primary, .text-on-surface { color: var(--run-brown) !important; }
+  .text-on-primary, .text-on-primary-container { color: var(--run-cream) !important; }
+  .bg-secondary { background-color: var(--run-caramel) !important; }
+  .bg-secondary-container { background-color: var(--run-caramel-light) !important; }
+  .text-secondary { color: #8a5225 !important; }
+  .text-secondary-fixed { color: #ffe4bd !important; }
+  .text-on-secondary-fixed, .text-on-secondary-container { color: #3d2618 !important; }
+  .bg-surface, .bg-background { background-color: var(--run-cream) !important; }
+  .bg-surface-container-low { background-color: #faf1e5 !important; }
+  .bg-surface-container { background-color: #f4e4cf !important; }
+  .bg-surface-container-high { background-color: #ead3b8 !important; }
+  .text-on-surface-variant { color: #665247 !important; }
+  .bg-primary\/70 { background-color: rgb(61 38 24 / .70) !important; }
+  .bg-primary\/80 { background-color: rgb(61 38 24 / .80) !important; }
+  .bg-primary\/90 { background-color: rgb(61 38 24 / .90) !important; }
+  .bg-secondary\/30 { background-color: rgb(167 106 50 / .30) !important; }
+  .bg-black\/25 { background-color: rgb(61 38 24 / .34) !important; }
+  .hover\:bg-primary:hover { background-color: var(--run-brown) !important; }
+  .hover\:bg-primary-container:hover { background-color: var(--run-brown-soft) !important; }
+  .hover\:bg-secondary:hover { background-color: #8a5225 !important; }
+  .hover\:bg-secondary-container:hover { background-color: var(--run-caramel-light) !important; }
+  .hover\:text-secondary:hover { color: #8a5225 !important; }
+  .hover\:text-on-secondary-fixed:hover { color: #3d2618 !important; }
+  .planner-tools-trigger {
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .planner-tools-trigger:hover,
+  .planner-tools-trigger:focus-visible,
+  .planner-tools-trigger.is-open {
+    border-color: var(--run-caramel-light);
+    box-shadow: 0 4px 14px rgb(61 38 24 / .22);
+    outline: none;
+    transform: translateY(-1px);
+  }
+  /* Planning now lives in the toolkit dropdown, not in a separate header button. */
+  header [data-path="plan-your-adventure"] { display: none !important; }
+  .planner-tools-menu {
+    position: fixed;
+    z-index: 60;
+    width: min(24rem, calc(100vw - 2rem));
+    max-height: calc(100vh - 6.5rem);
+    overflow-y: auto;
+    padding: .75rem;
+    border: 1px solid #dfc6a7;
+    border-radius: .75rem;
+    background: #fffdf8;
+    box-shadow: 0 18px 45px rgb(61 38 24 / .24);
+  }
+  .planner-tools-menu__label {
+    margin: 0 0 .55rem;
+    padding: 0 .25rem;
+    color: #775337;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+  .planner-tools-menu__item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: .7rem;
+    padding: .7rem;
+    border: 0;
+    border-radius: .5rem;
+    background: transparent;
+    color: var(--run-brown);
+    font: inherit;
+    font-size: .82rem;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+  }
+  .planner-tools-menu__item:hover,
+  .planner-tools-menu__item:focus-visible {
+    background: #f7e8d6;
+    color: #7e481f;
+    outline: none;
+  }
+  .planner-tools-menu__item .material-symbols-outlined {
+    color: var(--run-caramel);
+    font-size: 1.25rem;
+  }
+  .planner-tools-menu__intro {
+    margin: -.15rem .25rem .8rem;
+    color: #665247;
+    font-size: .78rem;
+    line-height: 1.4;
+  }
+  .planner-tools-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .7rem;
+  }
+  .planner-tools-field {
+    display: grid;
+    gap: .3rem;
+    color: #66462f;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .planner-tools-field select {
+    width: 100%;
+    min-width: 0;
+    padding: .65rem .55rem;
+    border: 1px solid #e3cdb2;
+    border-radius: .5rem;
+    background: #faf1e5;
+    color: var(--run-brown);
+    font: inherit;
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+  .planner-tools-field select:focus {
+    border-color: var(--run-caramel);
+    outline: 2px solid rgb(167 106 50 / .22);
+  }
+  .planner-tools-submit {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    padding: .75rem;
+    border: 0;
+    border-radius: .5rem;
+    background: var(--run-brown);
+    color: var(--run-cream);
+    font: inherit;
+    font-size: .84rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .planner-tools-submit:hover,
+  .planner-tools-submit:focus-visible {
+    background: var(--run-caramel);
+    outline: none;
+  }
   @media (max-width: 767px) {
     body { background-attachment: scroll !important; }
-    main > div > section:not(:first-child):not(.bg-primary) { background-color: rgba(236, 231, 213, .92) !important; }
+    main > div > section:not(:first-child):not(.bg-primary) { background-color: rgba(255, 253, 248, .98) !important; }
   }
 </style>
 <section class="relative w-full -mt-20 overflow-hidden bg-primary min-h-[720px] lg:min-h-[820px] flex flex-col justify-between">
@@ -164,79 +319,6 @@
 <span class="material-symbols-outlined text-[16px]">chevron_right</span>
 </button>
 </div>
-<!-- Floating Interactive Trip-Planning Panel -->
-<div class="relative z-30 max-w-7xl mx-auto w-full px-margin-mobile md:px-margin-tablet lg:px-margin -mb-16">
-<div class="bg-surface/95 backdrop-blur-xl rounded-xl shadow-2xl p-space-md lg:p-space-lg border border-surface-bright/60">
-<div class="flex items-center justify-between pb-space-sm mb-space-sm border-b border-surface-container-high">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-secondary text-[22px]">explore</span>
-<span class="font-title-md text-title-md text-primary font-bold">Plan Your Tanzanian Adventure</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded">Tailored • Affordable • Sustainable</span>
-</div>
-<form class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-sm items-end" id="hero-planner-form" onsubmit="handleHeroPlannerSubmit(event)">
-<div class="space-y-1">
-<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">Primary Destination</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-3 text-[18px] text-outline">location_on</span>
-<select class="w-full pl-9 pr-3 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary" id="planner-destination">
-<option value="Serengeti National Park">Serengeti National Park</option>
-<option value="Ngorongoro Crater">Ngorongoro Crater</option>
-<option value="Mount Kilimanjaro">Mount Kilimanjaro</option>
-<option value="Tarangire &amp; Lake Manyara">Tarangire &amp; Manyara</option>
-<option value="Zanzibar Spice Coast">Zanzibar Archipelago</option>
-<option value="Maasai &amp; Hadzabe Communities">Maasai &amp; Hadzabe Lands</option>
-<option value="Mikumi National Park">Mikumi National Park</option>
-<option value="Magoroto Forest">Magoroto Forest Estate</option>
-</select>
-</div>
-</div>
-<div class="space-y-1">
-<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">Experience Focus</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-3 text-[18px] text-outline">category</span>
-<select class="w-full pl-9 pr-3 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary" id="planner-experience">
-<option value="Wildlife Safaris">Wildlife Safaris</option>
-<option value="Cultural Tourism">Cultural Tourism</option>
-<option value="Mountain Trekking">Mountain Trekking</option>
-<option value="Leisure &amp; Escapes">Leisure &amp; Escapes</option>
-<option value="Multi-Circuit Blend">Multi-Circuit Blend</option>
-</select>
-</div>
-</div>
-<div class="space-y-1">
-<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">Target Travel Month</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-3 text-[18px] text-outline">calendar_today</span>
-<select class="w-full pl-9 pr-3 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary" id="planner-month">
-<option value="June - October (Dry Migration)">Jun - Oct (Peak Migration)</option>
-<option value="January - March (Calving Season)">Jan - Mar (Calving Season)</option>
-<option value="November - December (Short Rains)">Nov - Dec (Lush Season)</option>
-<option value="April - May (Quiet Emerald Season)">Apr - May (Emerald Season)</option>
-</select>
-</div>
-</div>
-<div class="space-y-1">
-<label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">Travelers &amp; Duration</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-3 text-[18px] text-outline">group</span>
-<select class="w-full pl-9 pr-3 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary" id="planner-duration">
-<option value="2 Guests • 5-7 Days">2 Guests • 5-7 Days</option>
-<option value="Family (3-5 Guests) • 7-10 Days">Family (3-5) • 7-10 Days</option>
-<option value="Private Group (6+) • 10-14 Days">Group (6+) • 10-14 Days</option>
-<option value="Solo Traveler • 4-6 Days">Solo Traveler • 4-6 Days</option>
-</select>
-</div>
-</div>
-<div>
-<button class="w-full py-2.5 px-space-md rounded-lg bg-primary text-surface-bright font-label-lg text-label-lg hover:bg-primary-container transition-all flex items-center justify-center gap-space-xs shadow-md" type="submit">
-<span class="material-symbols-outlined text-[18px] text-secondary-fixed">search</span>
-<span>Search / Plan</span>
-</button>
-</div>
-</form>
-</div>
-</div>
 </section>
 <!-- SECTION 2: WELCOME & ETHOS (Proposal Foundations) -->
 <section id="about-us" class="w-full pt-28 pb-space-2xl bg-surface">
@@ -272,7 +354,7 @@
 </div>
 <div class="lg:col-span-6 grid grid-cols-2 gap-space-md">
 <div class="space-y-space-md">
-<div class="rounded-xl overflow-hidden shadow-lg h-60 bg-cover bg-center" data-alt="Close up of a magnificent African cheetah resting proudly on a sunlit rock mound in Serengeti grassland during warm golden hour with vast savanna background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDWCjN-t7zYvsfEDA3umHQmfpKKvpfRjBYniE3evkYfxlBXS9O7o9a_UoxADHHoQ3FFwQ76TiFzftw9m_jJLa9xLQdiU0B0XJDR94jWiOnpKRm6m2opixRO7NSjSiUSn_uLZA6iaqONSi9-otCmZ5fevQX1-T9FgLcbCp-zkqi2HIgQFKOq3DVa7HV_-O_zeqhcf75vwdB2RSs078nsD9RhRGt9yt__BkNBMBZMTzofX6Pm785HR0dyaQ')"></div>
+<img class="rounded-xl overflow-hidden shadow-lg h-60 w-full object-cover" src="../pictures/crew%20image.JPG.jpeg" alt="Run Africa travelers and team together at a Tanzanian destination"/>
 <div class="p-space-md rounded-xl bg-primary text-surface-bright space-y-space-xs">
 <div class="flex items-center gap-space-xs">
 <span class="material-symbols-outlined text-secondary-fixed text-[24px]">verified</span>
@@ -287,7 +369,7 @@
 <span class="font-label-md text-label-md text-secondary font-bold uppercase tracking-wider">Year-One Travelers</span>
 <p class="font-body-sm text-body-sm text-on-surface-variant">Our documented operational benchmark bringing global travelers into intimate fellowship with Tanzania's wild habitats.</p>
 </div>
-<div class="rounded-xl overflow-hidden shadow-lg h-60 bg-cover bg-center" data-alt="Traditional Maasai guide in authentic red shuka robes walking through golden sunlit acacia woodland with warm mountain silhouette backdrop." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAZFcTTOB70MQHFMv5v63_w0DYMYYT2tonUTyvrfwwfIlGn_U4wRz5Zs8T422zQy_jJ_W5Jmz6yX2Ii7UrzJmgTueYRAPZkTgBVBfhumiAeEElfYPniCu8E9cHt0jZhiJoOmByVGDEikq0rk1mM7l-YZIzZyUvtgI67RXQFN4ywhKLha9gci6PmCMpsyF01k5KJmX8rP96WVb0ADvg-j3jlfDdYFO5v6w52YaHdDdQsQBd3q11TtOApQA')"></div>
+<img class="rounded-xl overflow-hidden shadow-lg h-60 w-full object-cover" src="../pictures/IMG_5664%2013.59.49.JPG.jpeg" alt="Run Africa travelers beginning their journey beside the tour vehicle"/>
 </div>
 </div>
 </div>
@@ -420,7 +502,7 @@
 </div>
 <!-- Filter Tabs -->
 <div class="flex items-center flex-wrap gap-1 p-1 bg-surface-container rounded-lg">
-<button class="dest-filter-btn px-3 py-1.5 rounded-lg text-label-md font-label-md bg-primary text-surface-bright shadow-sm" onclick="filterDestinations('all', this)">All (10)</button>
+<button class="dest-filter-btn px-3 py-1.5 rounded-lg text-label-md font-label-md bg-primary text-surface-bright shadow-sm" onclick="filterDestinations('all', this)">All (9)</button>
 <button class="dest-filter-btn px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-primary" onclick="filterDestinations('northern', this)">Northern Circuit</button>
 <button class="dest-filter-btn px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-primary" onclick="filterDestinations('southern', this)">Southern Circuit</button>
 <button class="dest-filter-btn px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-primary" onclick="filterDestinations('coastal', this)">Coastal &amp; Islands</button>
@@ -1041,7 +1123,7 @@
 </div>
 <div>
 <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block mb-1">Special Notes / Desired Sights</label>
-<textarea class="w-full px-3 py-2 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary" placeholder="Tell us if you are celebrating a milestone, have dietary requirements, or wish to witness the Mara river crossing..." rows="3"></textarea>
+<textarea class="w-full px-3 py-2 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary" id="modal-notes-field" placeholder="Tell us if you are celebrating a milestone, have dietary requirements, or wish to witness the Mara river crossing..." rows="3"></textarea>
 </div>
 <div class="pt-space-xs">
 <button class="w-full py-3 rounded-lg bg-primary text-surface-bright font-label-lg text-label-lg hover:bg-secondary transition-all flex items-center justify-center gap-space-xs shadow-md" type="submit">
@@ -1243,13 +1325,6 @@
     if (modal) modal.classList.add('hidden');
   }
 
-  function handleHeroPlannerSubmit(e) {
-    e.preventDefault();
-    const dest = document.getElementById('planner-destination')?.value || '';
-    const exp = document.getElementById('planner-experience')?.value || '';
-    openBookingModal(exp, dest);
-  }
-
   function handleInquirySubmit(e) {
     e.preventDefault();
     const formContainer = document.getElementById('inquiry-form-container');
@@ -1283,6 +1358,130 @@
     alert('Thank you for sharing your feedback with Run Africa Expeditions! Your testimonial is registered for publishing.');
     closeReviewModal();
   }
+
+  // The right-hand profile icon opens a compact, active trip-planning toolbar.
+  function initialisePlannerTools() {
+    const profileIcon = [...document.querySelectorAll('header .material-symbols-outlined')]
+      .find(icon => icon.textContent.trim() === 'person');
+    const trigger = profileIcon?.parentElement;
+    if (!trigger || document.getElementById('planner-tools-menu')) return;
+
+    trigger.classList.add('planner-tools-trigger');
+    profileIcon.textContent = 'tune';
+    trigger.setAttribute('role', 'button');
+    trigger.setAttribute('tabindex', '0');
+    trigger.setAttribute('aria-label', 'Open trip planning toolkit');
+    trigger.setAttribute('aria-haspopup', 'dialog');
+    trigger.setAttribute('aria-expanded', 'false');
+
+    const menu = document.createElement('div');
+    menu.id = 'planner-tools-menu';
+    menu.className = 'planner-tools-menu hidden';
+    menu.setAttribute('role', 'dialog');
+    menu.setAttribute('aria-label', 'Trip planning toolkit');
+    menu.innerHTML = `
+      <p class="planner-tools-menu__label">Trip planning toolkit</p>
+      <p class="planner-tools-menu__intro">Choose your preferences, then get a tailored Tanzania itinerary.</p>
+      <form class="planner-tools-form" id="profile-planner-form">
+        <label class="planner-tools-field">Destination
+          <select id="profile-destination">
+            <option value="Serengeti National Park">Serengeti</option>
+            <option value="Ngorongoro Crater">Ngorongoro</option>
+            <option value="Mount Kilimanjaro">Kilimanjaro</option>
+            <option value="Tarangire &amp; Lake Manyara">Tarangire &amp; Manyara</option>
+            <option value="Zanzibar Spice Coast">Zanzibar</option>
+            <option value="Maasai &amp; Hadzabe Communities">Maasai &amp; Hadzabe</option>
+            <option value="Mikumi National Park">Mikumi</option>
+            <option value="Magoroto Forest">Magoroto Forest</option>
+          </select>
+        </label>
+        <label class="planner-tools-field">Experience
+          <select id="profile-experience">
+            <option value="Wildlife Safaris">Wildlife safari</option>
+            <option value="Cultural Tourism">Cultural tourism</option>
+            <option value="Mountain Trekking">Mountain trekking</option>
+            <option value="Leisure &amp; Escapes">Leisure &amp; escapes</option>
+            <option value="Multi-Circuit Blend">Multi-circuit blend</option>
+          </select>
+        </label>
+        <label class="planner-tools-field">Travel month
+          <select id="profile-month">
+            <option value="June - October (Dry Migration)">Jun - Oct</option>
+            <option value="January - March (Calving Season)">Jan - Mar</option>
+            <option value="November - December (Short Rains)">Nov - Dec</option>
+            <option value="April - May (Emerald Season)">Apr - May</option>
+          </select>
+        </label>
+        <label class="planner-tools-field">Travelers &amp; duration
+          <select id="profile-duration">
+            <option value="2 Guests • 5-7 Days">2 guests • 5-7 days</option>
+            <option value="Family (3-5 Guests) • 7-10 Days">Family • 7-10 days</option>
+            <option value="Private Group (6+) • 10-14 Days">Group • 10-14 days</option>
+            <option value="Solo Traveler • 4-6 Days">Solo • 4-6 days</option>
+          </select>
+        </label>
+        <button class="planner-tools-submit" type="submit"><span class="material-symbols-outlined">search</span>Search / Plan</button>
+      </form>`;
+    document.body.appendChild(menu);
+
+    const positionMenu = () => {
+      const bounds = trigger.getBoundingClientRect();
+      const menuWidth = Math.min(384, window.innerWidth - 32);
+      menu.style.top = `${bounds.bottom + 10}px`;
+      menu.style.left = `${Math.max(16, Math.min(bounds.right - menuWidth, window.innerWidth - menuWidth - 16))}px`;
+    };
+    const closeMenu = () => {
+      menu.classList.add('hidden');
+      trigger.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+    };
+    const toggleMenu = () => {
+      if (menu.classList.contains('hidden')) {
+        positionMenu();
+        menu.classList.remove('hidden');
+        trigger.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        window.setTimeout(() => document.getElementById('profile-destination')?.focus(), 0);
+      } else {
+        closeMenu();
+      }
+    };
+    trigger.addEventListener('click', toggleMenu);
+    trigger.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleMenu();
+      }
+    });
+    menu.querySelector('#profile-planner-form').addEventListener('submit', event => {
+      event.preventDefault();
+      const destination = document.getElementById('profile-destination').value;
+      const experience = document.getElementById('profile-experience').value;
+      const month = document.getElementById('profile-month').value;
+      const duration = document.getElementById('profile-duration').value;
+      closeMenu();
+      openBookingModal(experience, destination);
+      const notes = document.getElementById('modal-notes-field');
+      if (notes) notes.value = `Travel month: ${month}. Travelers and duration: ${duration}.`;
+    });
+    document.addEventListener('click', event => {
+      if (!menu.contains(event.target) && !trigger.contains(event.target)) closeMenu();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeMenu();
+    });
+    window.addEventListener('resize', () => {
+      if (!menu.classList.contains('hidden')) positionMenu();
+    });
+    document.querySelectorAll('a[href="#hero-planner-form"]').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        if (menu.classList.contains('hidden')) toggleMenu();
+      });
+    });
+  }
+
+  initialisePlannerTools();
 
   function setRating(num) {
     // Visual feedback placeholder for review stars

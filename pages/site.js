@@ -1,33 +1,35 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const planner = document.getElementById('hero-planner-form');
-  document.querySelector('[aria-label="Search Expeditions"]')?.addEventListener('click', () => {
-    planner?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
+(() => {
+  const key = 'run-africa-language';
+  const sw = { Home: 'Mwanzo', Safaris: 'Safari', Destinations: 'Maeneo', 'Cultural Tourism': 'Utalii wa Utamaduni', 'Mountain Trekking': 'Matembezi ya Milimani', Leisure: 'Mapumziko', 'Plan Your Trip': 'Panga Safari Yako', 'About Us': 'Kuhusu Sisi', Contact: 'Wasiliana', 'Plan Your Adventure': 'Panga Safari Yako', 'Explore Wildlife Safaris': 'Chunguza Safari za Wanyamapori', 'Explore Ngorongoro': 'Chunguza Ngorongoro', 'Explore Mountain Trekking': 'Chunguza Matembezi ya Milimani', 'Explore Cultural Tours': 'Chunguza Ziara za Utamaduni', 'Explore Leisure Trips': 'Chunguza Safari za Mapumziko', 'Plan Your Tanzanian Adventure': 'Panga Safari Yako ya Tanzania', 'Search / Plan': 'Tafuta / Panga', '← Back to home': '← Rudi mwanzo', 'CONTACT RUN AFRICA': 'WASILIANA NA RUN AFRICA', 'Send inquiry': 'Tuma ombi', 'Explore Tanzania': 'Chunguza Tanzania', 'Ready to plan this experience?': 'Uko tayari kupanga tukio hili?', 'Talk to Run Africa': 'Ongea na Run Africa' };
+  const originals = new WeakMap();
+  function apply(language) {
+    document.documentElement.lang = language;
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+      if (node.parentElement.closest('script,style,noscript,[data-language-switcher]')) return;
+      if (!originals.has(node)) originals.set(node, node.nodeValue);
+      const english = originals.get(node), leading = english.match(/^\s*/)[0], trailing = english.match(/\s*$/)[0];
+      node.nodeValue = leading + (language === 'sw' ? (sw[english.trim()] || english.trim()) : english.trim()) + trailing;
+    });
+    document.querySelectorAll('[data-language]').forEach(button => {
+      const active = button.dataset.language === language;
+      button.setAttribute('aria-pressed', active); button.classList.toggle('bg-surface', active); button.classList.toggle('font-bold', active); button.classList.toggle('text-primary', active);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    // The site home page is index.html. Repair legacy links that referenced a
+    // non-existent runafrica.html file so the destination directory is reachable.
+    const onHomePage = /(?:^|\/)index\.html$/.test(location.pathname) || location.pathname.endsWith('/pages/');
+    document.querySelectorAll('a[href="runafrica.html"]').forEach(link => {
+      link.href = 'index.html';
+    });
+    document.querySelectorAll('a[href="runafrica.html#destinations-section"]').forEach(link => {
+      link.href = onHomePage ? '#destinations-section' : 'index.html#destinations-section';
+    });
 
-  const translations = {
-    Home: 'Mwanzo', Safaris: 'Safari', Destinations: 'Maeneo',
-    'Cultural Tourism': 'Utalii wa Utamaduni', 'Mountain Trekking': 'Matembezi ya Mlima',
-    Leisure: 'Mapumziko', 'Plan Your Trip': 'Panga Safari Yako', 'About Us': 'Kuhusu Sisi',
-    Contact: 'Wasiliana', 'Plan Your Adventure': 'Panga Safari'
-  };
-  const languageButtons = [...document.querySelectorAll('header button')]
-    .filter(button => ['EN', 'SW'].includes(button.textContent.trim()));
-  const setLanguage = (language) => {
-    document.documentElement.lang = language === 'sw' ? 'sw' : 'en';
-    document.querySelectorAll('header a').forEach(link => {
-      const original = link.dataset.english || link.textContent.trim();
-      link.dataset.english = original;
-      if (language === 'sw' && translations[original]) link.textContent = translations[original];
-      else link.textContent = original;
-    });
-    languageButtons.forEach(button => {
-      const active = button.textContent.trim().toLowerCase() === language;
-      button.classList.toggle('bg-surface', active);
-      button.classList.toggle('font-bold', active);
-      button.classList.toggle('text-primary', active);
-    });
-    localStorage.setItem('run-africa-language', language);
-  };
-  languageButtons.forEach(button => button.addEventListener('click', () => setLanguage(button.textContent.trim().toLowerCase())));
-  if (languageButtons.length) setLanguage(localStorage.getItem('run-africa-language') || 'en');
-});
+    document.querySelectorAll('button').forEach(button => { const text = button.textContent.trim().toLowerCase(); if (text === 'en' || text === 'sw') button.dataset.language ||= text; });
+    document.querySelectorAll('[data-language]').forEach(button => button.addEventListener('click', () => { const language = button.dataset.language === 'sw' ? 'sw' : 'en'; localStorage.setItem(key, language); apply(language); }));
+    apply(localStorage.getItem(key) === 'sw' ? 'sw' : 'en');
+  });
+})();
